@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UFi-GW-M6q">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,13 +17,39 @@
                     <view key="view" contentMode="scaleToFill" id="e6j-fg-hZT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9yd-Ne-7nO">
+                                <rect key="frame" x="128.5" y="332" width="118" height="45"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <state key="normal" title="Start Chat"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" id="exh-M9-hE9"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OneChat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s1O-yd-CEh">
+                                <rect key="frame" x="51" y="144" width="273" height="118"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="s1O-yd-CEh" secondAttribute="height" multiplier="273:118" id="xmM-e4-Uom"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="s1O-yd-CEh" firstAttribute="leading" secondItem="cTd-6f-TQQ" secondAttribute="leading" constant="51" id="KWu-EW-oie"/>
+                            <constraint firstItem="s1O-yd-CEh" firstAttribute="top" secondItem="cTd-6f-TQQ" secondAttribute="top" constant="124" id="PDn-Lf-7qs"/>
+                            <constraint firstItem="9yd-Ne-7nO" firstAttribute="top" secondItem="s1O-yd-CEh" secondAttribute="bottom" constant="70" id="Wre-XF-Wxy"/>
+                            <constraint firstItem="s1O-yd-CEh" firstAttribute="centerX" secondItem="e6j-fg-hZT" secondAttribute="centerX" id="ll2-Vq-oId"/>
+                            <constraint firstItem="s1O-yd-CEh" firstAttribute="centerX" secondItem="9yd-Ne-7nO" secondAttribute="centerX" id="sgJ-b2-3Xp"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="cTd-6f-TQQ"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mQY-bC-aqq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1006" y="-41"/>
+            <point key="canvasLocation" x="-194.40000000000001" y="-67.016491754122939"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -37,6 +64,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="614" y="47"/>
         </scene>
     </scenes>
 </document>

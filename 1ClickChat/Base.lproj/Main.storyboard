@@ -13,8 +13,8 @@
         <!--StartView-->
         <scene sceneID="ktr-9f-h6n">
             <objects>
-                <viewController title="StartView" id="UFi-GW-M6q" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="e6j-fg-hZT">
+                <viewController title="StartView" id="UFi-GW-M6q" customClass="StartViewController" customModule="_ClickChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="e6j-fg-hZT" customClass="StartViewCOntroller">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -23,6 +23,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <state key="normal" title="はじめる"/>
                                 <connections>
+                                    <action selector="StartButton:" destination="UFi-GW-M6q" eventType="touchUpInside" id="MXS-0V-dEf"/>
                                     <segue destination="BYZ-38-t0r" kind="presentation" id="exh-M9-hE9"/>
                                 </connections>
                             </button>

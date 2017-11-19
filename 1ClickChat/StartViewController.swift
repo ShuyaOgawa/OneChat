@@ -52,8 +52,6 @@ class StartViewController: UIViewController {
             let value = snapshot.value as? NSDictionary
             print(value)
             let all_member_array = value?["all_member"] as AnyObject?
-            print("ccccccccccccccccccccccc")
-            print(all_member_array?.count)
             let my_id = all_member_array?.count
             ref.child("user/all_member/\(my_id!)").setValue(my_id!)
             ref.child("user/waiting_member/\(my_id!)").setValue(my_id!)

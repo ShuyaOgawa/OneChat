@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class StartViewController: UIViewController {
 
@@ -22,6 +24,32 @@ class StartViewController: UIViewController {
     }
     
 
+    @IBAction func StartButton(_ sender: UIButton) {
+        let ref = Database.database().reference()
+        
+       
+        ref.child("messages").child("-KzHdhFa1hwJaTRJFGPq").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            let username = value?["text"] as? String ?? ""
+            print("aaaaaaaaaaaaaaa")
+            print(username)
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        ref.child("all_member").child("id").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            let username = value?["id"] as? String ?? ""
+            print("aaaaaaaaaaaaaaa")
+            print(username)
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+       
+        
+    }
     /*
     // MARK: - Navigation
 
@@ -31,5 +59,8 @@ class StartViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    
 
 }

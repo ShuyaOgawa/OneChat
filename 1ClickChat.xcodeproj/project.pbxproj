@@ -82,9 +82,9 @@
 		9811F7291FA05C69004DAABB /* 1ClickChat */ = {
 			isa = PBXGroup;
 			children = (
+				9811F72E1FA05C69004DAABB /* Main.storyboard */,
 				9811F72A1FA05C69004DAABB /* AppDelegate.swift */,
 				9811F72C1FA05C69004DAABB /* ViewController.swift */,
-				9811F72E1FA05C69004DAABB /* Main.storyboard */,
 				983C3E3A1FC153A7002BE941 /* StartViewController.swift */,
 				9811F7311FA05C69004DAABB /* Assets.xcassets */,
 				983C3E381FC14785002BE941 /* GoogleService-Info.plist */,

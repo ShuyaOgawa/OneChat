@@ -13,6 +13,7 @@
 		9811F7321FA05C69004DAABB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9811F7311FA05C69004DAABB /* Assets.xcassets */; };
 		9811F7351FA05C69004DAABB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9811F7331FA05C69004DAABB /* LaunchScreen.storyboard */; };
 		983C3E391FC14785002BE941 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 983C3E381FC14785002BE941 /* GoogleService-Info.plist */; };
+		983C3E3B1FC153A7002BE941 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983C3E3A1FC153A7002BE941 /* StartViewController.swift */; };
 		ECDE00637453AC7636B76E4C /* Pods_1ClickChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FEE0A9F7BDB54E2B810FD91 /* Pods_1ClickChat.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		9811F7341FA05C69004DAABB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9811F7361FA05C69004DAABB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		983C3E381FC14785002BE941 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		983C3E3A1FC153A7002BE941 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		9961C3F1EDE1EA13067B5858 /* Pods-1ClickChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-1ClickChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-1ClickChat/Pods-1ClickChat.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +85,7 @@
 				9811F72A1FA05C69004DAABB /* AppDelegate.swift */,
 				9811F72C1FA05C69004DAABB /* ViewController.swift */,
 				9811F72E1FA05C69004DAABB /* Main.storyboard */,
+				983C3E3A1FC153A7002BE941 /* StartViewController.swift */,
 				9811F7311FA05C69004DAABB /* Assets.xcassets */,
 				983C3E381FC14785002BE941 /* GoogleService-Info.plist */,
 				9811F7331FA05C69004DAABB /* LaunchScreen.storyboard */,
@@ -235,6 +238,7 @@
 			files = (
 				9811F72D1FA05C69004DAABB /* ViewController.swift in Sources */,
 				9811F72B1FA05C69004DAABB /* AppDelegate.swift in Sources */,
+				983C3E3B1FC153A7002BE941 /* StartViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

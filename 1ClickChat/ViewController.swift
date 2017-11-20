@@ -14,9 +14,14 @@ import FirebaseDatabase
 class ViewController: JSQMessagesViewController {
     
     var messages = [JSQMessage]()
+    var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+        print("aaaaaaaaaaaaaaa")
+        print(self.appDelegate.my_id)
+        
         senderDisplayName = "tsuru"
         senderId = "Tsuru"
         let ref = Database.database().reference()

@@ -11,9 +11,14 @@ import Firebase
 import FirebaseDatabase
 
 class StartViewController: UIViewController {
+    
+    var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         let ref = Database.database().reference()
         ref.child("user/all_member/0").setValue("must_not_delete")
         ref.child("user/waiting_member/0").setValue("must_not_delete")
@@ -21,6 +26,9 @@ class StartViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -29,37 +37,32 @@ class StartViewController: UIViewController {
     
 
     @IBAction func StartButton(_ sender: UIButton) {
+        
         let ref = Database.database().reference()
-        
-        
-        
-   /*
-        ref.child("messages").child("-KzIaGarqKKCP7wkHf-E").observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            let value = snapshot.value as? NSDictionary
-            print(value)
-            let username = value?["text"] as? String ?? ""
-            print("aaaaaaaaaaaaaaa")
-            print(username)
-        }) { (error) in
-            print(error.localizedDescription)
-        }
- */
- 
-        
+   
         ref.child("user").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary
-            print(value)
             let all_member_array = value?["all_member"] as AnyObject?
-            print("ccccccccccccccccccccccc")
-            print(all_member_array?.count)
-            let my_id = all_member_array?.count
-            ref.child("user/all_member/\(my_id!)").setValue(my_id!)
-            ref.child("user/waiting_member/\(my_id!)").setValue(my_id!)
+            self.appDelegate.my_id = all_member_array?.count as AnyObject
+            ref.child("user/all_member/\(self.appDelegate.my_id!)").setValue(self.appDelegate.my_id!)
+            ref.child("user/waiting_member/\(self.appDelegate.my_id!)").setValue(self.appDelegate.my_id!)
         }) { (error) in
             print(error.localizedDescription)
         }
+        
+        /*
+         ref.child("messages").child("-KzIaGarqKKCP7wkHf-E").observeSingleEvent(of: .value, with: { (snapshot) in
+         // Get user value
+         let value = snapshot.value as? NSDictionary
+         print(value)
+         let username = value?["text"] as? String ?? ""
+         print("aaaaaaaaaaaaaaa")
+         print(username)
+         }) { (error) in
+         print(error.localizedDescription)
+         }
+         */
        
 //        ref.child("user/01").setValue("2")
 //        ref.child("user/02").setValue("2")

@@ -16,11 +16,9 @@ class ViewController: JSQMessagesViewController {
     var messages = [JSQMessage]()
     var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
     
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-        print("aaaaaaaaaaaaaaa")
-        print(self.appDelegate.my_id)
         
         senderDisplayName = "tsuru"
         senderId = "Tsuru"
@@ -56,8 +54,49 @@ class ViewController: JSQMessagesViewController {
             self.collectionView.reloadData()
         })
     }
+ 
+    /*
+    override func viewDidAppear(_ animated: Bool) {
+        
+        
+        
+        let my_id = self.appDelegate.my_id
+        let your_id = self.appDelegate.your_id
+        let ref = Database.database().reference()
+        ref.observe(.value, with: { snapshot in
+            guard let dic = snapshot.value as? Dictionary<String, AnyObject> else {
+                return
+            }
+            guard let posts = dic["messages"] as? Dictionary<String, Dictionary<String, AnyObject>> else {
+                return
+            }
+            // keyとdateが入ったタプルを作る
+            var keyValueArray: [(String, Int)] = []
+            for (key, value) in posts {
+                keyValueArray.append((key: key, date: value["date"] as! Int))
+            }
+            keyValueArray.sort{$0.1 < $1.1}
+            // タプルの中のdate でソートしてタプルの順番を揃える(配列で) これでkeyが順番通りになる
+            // messagesを再構成
+            var preMessages = [JSQMessage]()
+            for sortedTuple in keyValueArray {
+                for (key, value) in posts {
+                    if key == sortedTuple.0 {           // 揃えた順番通りにメッセージを作成
+                        let senderId = value["senderId"] as! String!
+                        let text = value["text"] as! String!
+                        let displayName = value["displayName"] as! String!
+                        preMessages.append(JSQMessage(senderId: senderId, displayName: displayName, text: text))
+                    }
+                }
+            }
+            self.messages = preMessages
+            
+            self.collectionView.reloadData()
+        })
+        
+    }
 
-    
+  */
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
         return messages[indexPath.row]
@@ -70,6 +109,7 @@ class ViewController: JSQMessagesViewController {
         } else {
             return JSQMessagesBubbleImageFactory().incomingMessagesBubbleImage(with: UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1))
         }
+        
     }
     
     // コメントの文字色の指定

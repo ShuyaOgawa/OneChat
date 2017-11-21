@@ -24,7 +24,6 @@
                                 <state key="normal" title="はじめる"/>
                                 <connections>
                                     <action selector="StartButton:" destination="UFi-GW-M6q" eventType="touchUpInside" id="MXS-0V-dEf"/>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" id="exh-M9-hE9"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OneChat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s1O-yd-CEh">
@@ -53,10 +52,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cTd-6f-TQQ"/>
                     </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="SegueId" id="Nt0-Qv-Pc2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mQY-bC-aqq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-194.40000000000001" y="-67.016491754122939"/>
+            <point key="canvasLocation" x="-382" y="-81"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">

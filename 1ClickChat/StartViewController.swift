@@ -22,6 +22,8 @@ class StartViewController: UIViewController {
         let ref = Database.database().reference()
         ref.child("user/all_member/0").setValue("must_not_delete")
         ref.child("user/waiting_member/0").setValue("must_not_delete")
+        ref.child("chat_room/n1&n2/n1").setValue("~~~~")
+        ref.child("chat_room/n1&n2/n2").setValue("~~~~")
 
 
         // Do any additional setup after loading the view.
@@ -50,12 +52,20 @@ class StartViewController: UIViewController {
             self.appDelegate.my_id = all_member_array?.count as AnyObject
             print("aaaaaaaaaaaaaa")
             print(self.appDelegate.my_id)
+            let waiting_member_array = value?["waiting_member"] as AnyObject?
+            self.appDelegate.my_id = all_member_array?.count as AnyObject?
+            self.appDelegate.your_id = waiting_member_array?[1] as AnyObject?
+            
             ref.child("user/all_member/\(self.appDelegate.my_id!)").setValue(self.appDelegate.my_id!)
-            ref.child("user/waiting_member/\(self.appDelegate.my_id!)").setValue(self.appDelegate.my_id!)
+            ref.child("user/waiting_member/\((waiting_member_array?.count)!)").setValue(self.appDelegate.my_id!)
         }) { (error) in
             print(error.localizedDescription)
         }
         
+        
+      
+        
+        self.performSegue(withIdentifier: "SegueId", sender: self)
         /*
          ref.child("messages").child("-KzIaGarqKKCP7wkHf-E").observeSingleEvent(of: .value, with: { (snapshot) in
          // Get user value
@@ -85,6 +95,8 @@ class StartViewController: UIViewController {
     }
     
   
+    
+    
     /*
     // MARK: - Navigation
 

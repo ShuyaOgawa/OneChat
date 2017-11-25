@@ -24,9 +24,8 @@ class StartViewController: UIViewController {
         ref.child("user/waiting_member/0").setValue("must_not_delete")
         ref.child("chat_room/n1&n2/n1").setValue("~~~~")
         ref.child("chat_room/n1&n2/n2").setValue("~~~~")
-
-
-        // Do any additional setup after loading the view.
+        
+       
     }
     
     
@@ -56,20 +55,16 @@ class StartViewController: UIViewController {
                 ref.child("user/waiting_member/\(my_id!)").setValue(my_id!)
                 self.appDelegate.my_id = my_id! as AnyObject
                 //2人目のユーザーが来るまでデータ取得
-                while waiting_member_array?.count == 1 {
-                    let ref = Database.database().reference()
-                    print("while")
-                    print(waiting_member_array?.count)
-                    ref.child("user").observeSingleEvent(of: .value, with: { (snapshot) in
+                    ref.observe(.value, with: { snapshot in
                         let value = snapshot.value as? NSDictionary
+                        let user_array = value?["user"] as AnyObject?
+                        let waiting_member_array = user_array!["waiting_member"] as AnyObject?
+                        print(waiting_member_array!.count)
                         print("ループ")
-                        let waiting_member_array = value?["waiting_member"] as AnyObject?
                     }) { (error) in
                         print(error.localizedDescription)
                     }
-                }
                 print("well done")
-                
             }
             
             
@@ -102,6 +97,10 @@ class StartViewController: UIViewController {
             print(error.localizedDescription)
         }
         
+        
+       
+                
+            
         
       
         

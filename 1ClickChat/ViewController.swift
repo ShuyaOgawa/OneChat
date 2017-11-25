@@ -16,7 +16,7 @@ class ViewController: JSQMessagesViewController {
     var messages = [JSQMessage]()
     var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
     
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,14 +54,14 @@ class ViewController: JSQMessagesViewController {
             self.collectionView.reloadData()
         })
     }
- 
+    
     
     override func viewDidAppear(_ animated: Bool) {
         
         
         
-        let my_id = self.appDelegate.my_id
-        let your_id = self.appDelegate.your_id
+        let my_id = self.appDelegate.my_id!
+        let your_id = self.appDelegate.your_id!
         print("my_id",my_id)
         print("your_id",your_id)
         
@@ -99,8 +99,8 @@ class ViewController: JSQMessagesViewController {
         })
         
     }
-
-  
+    
+    
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
         return messages[indexPath.row]
@@ -151,3 +151,4 @@ class ViewController: JSQMessagesViewController {
     
     
 }
+

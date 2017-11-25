@@ -18,14 +18,12 @@ class StartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         let ref = Database.database().reference()
         ref.child("user/all_member/0").setValue("must_not_delete")
         ref.child("user/waiting_member/0").setValue("must_not_delete")
         ref.child("chat_room/n1&n2/n1").setValue("~~~~")
         ref.child("chat_room/n1&n2/n2").setValue("~~~~")
         
-       
     }
     
     
@@ -59,8 +57,10 @@ class StartViewController: UIViewController {
                         let value = snapshot.value as? NSDictionary
                         let user_array = value?["user"] as AnyObject?
                         let waiting_member_array = user_array!["waiting_member"] as AnyObject?
-                        print(waiting_member_array!.count)
-                        print("ループ")
+                        if waiting_member_array!.count == 3 {
+                            self.appDelegate.your_id = waiting_member_array?[2] as AnyObject?
+                            self.performSegue(withIdentifier: "SegueId", sender: self)
+                        }
                     }) { (error) in
                         print(error.localizedDescription)
                     }
@@ -74,9 +74,12 @@ class StartViewController: UIViewController {
                 ref.child("user/waiting_member/\(my_id!)").setValue(my_id!)
                 self.appDelegate.my_id = my_id as AnyObject?
                 self.appDelegate.your_id = waiting_member_array?[1] as AnyObject?
+                self.performSegue(withIdentifier: "SegueId", sender: self)
             }
             
             //③waiting_memberに3人入ってしまった時の処理
+            
+           
             
             
            
@@ -97,14 +100,8 @@ class StartViewController: UIViewController {
             print(error.localizedDescription)
         }
         
-        
        
-                
-            
         
-      
-        
-        self.performSegue(withIdentifier: "SegueId", sender: self)
         /*
          ref.child("messages").child("-KzIaGarqKKCP7wkHf-E").observeSingleEvent(of: .value, with: { (snapshot) in
          // Get user value

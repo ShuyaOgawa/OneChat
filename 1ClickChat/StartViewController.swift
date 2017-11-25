@@ -62,6 +62,11 @@ class StartViewController: UIViewController {
                         let all_member_count = all_member_array?.count as Int?
                         self.appDelegate.your_id = all_member_count! - 1 as AnyObject
                         self.performSegue(withIdentifier: "SegueId", sender: self)
+                        
+                        //chat_roomを作る
+                        self.set_chat_room(my_id: self.appDelegate.my_id as! Int, your_id: self.appDelegate.your_id as! Int)
+                        
+                        
                     }
                 }) { (error) in
                     print(error.localizedDescription)
@@ -79,25 +84,29 @@ class StartViewController: UIViewController {
                 let all_member_count = all_member_array?.count as Int?
                 self.appDelegate.your_id = all_member_count! - 1 as AnyObject
                 self.performSegue(withIdentifier: "SegueId", sender: self)
+                
+                
             }
             
             //③waiting_memberに3人入ってしまった時の処理
             
-            
-            
-            
-        
+       
             
         }) { (error) in
             print(error.localizedDescription)
         }
         
-        
-        
-        
     }
     
-    
+    //chat_roomを作りwaiting_memberから削除する
+    func set_chat_room(my_id: Int, your_id: Int){
+        let ref = Database.database().reference()
+        ref.child("chat_room/\(my_id)&\(your_id)/\(my_id)").setValue("~~~~")
+        ref.child("chat_room/\(my_id)&\(your_id)/\(your_id)").setValue("~~~~")
+        
+        ref.child("user/waiting_member/\(my_id)").removeValue()
+        ref.child("user/waiting_member/\(your_id)").removeValue()
+    }
     
     
     /*

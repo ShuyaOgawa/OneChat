@@ -133,6 +133,7 @@ class ViewController: JSQMessagesViewController {
     }
     
     // ユーザのアバターの設定
+    
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
         return JSQMessagesAvatarImageFactory.avatarImage(
             withUserInitials: messages[indexPath.row].senderDisplayName,
@@ -141,6 +142,10 @@ class ViewController: JSQMessagesViewController {
             font: UIFont.systemFont(ofSize: 10),
             diameter: 30)
     }
+ 
+    
+   
+    
     
     // 送信ボタンを押した時の処理
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {

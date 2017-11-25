@@ -55,13 +55,17 @@ class ViewController: JSQMessagesViewController {
         })
     }
  
-    /*
+    
     override func viewDidAppear(_ animated: Bool) {
         
         
         
         let my_id = self.appDelegate.my_id
         let your_id = self.appDelegate.your_id
+        print("my_id",my_id)
+        print("your_id",your_id)
+        
+        
         let ref = Database.database().reference()
         ref.observe(.value, with: { snapshot in
             guard let dic = snapshot.value as? Dictionary<String, AnyObject> else {
@@ -96,7 +100,7 @@ class ViewController: JSQMessagesViewController {
         
     }
 
-  */
+  
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
         return messages[indexPath.row]

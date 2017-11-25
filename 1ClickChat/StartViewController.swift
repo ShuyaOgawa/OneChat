@@ -14,10 +14,9 @@ class StartViewController: UIViewController {
     
     var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         let ref = Database.database().reference()
         ref.child("user/all_member/0").setValue("must_not_delete")
@@ -25,22 +24,21 @@ class StartViewController: UIViewController {
         ref.child("chat_room/n1&n2/n1").setValue("~~~~")
         ref.child("chat_room/n1&n2/n2").setValue("~~~~")
         
-       
     }
     
     
     
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     @IBAction func StartButton(_ sender: UIButton) {
         
         let ref = Database.database().reference()
-   
+        
         ref.child("user").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary
@@ -55,15 +53,17 @@ class StartViewController: UIViewController {
                 ref.child("user/waiting_member/\(my_id!)").setValue(my_id!)
                 self.appDelegate.my_id = my_id! as AnyObject
                 //2人目のユーザーが来るまでデータ取得
-                    ref.observe(.value, with: { snapshot in
-                        let value = snapshot.value as? NSDictionary
-                        let user_array = value?["user"] as AnyObject?
-                        let waiting_member_array = user_array!["waiting_member"] as AnyObject?
-                        print(waiting_member_array!.count)
-                        print("ループ")
-                    }) { (error) in
-                        print(error.localizedDescription)
+                ref.observe(.value, with: { snapshot in
+                    let value = snapshot.value as? NSDictionary
+                    let user_array = value?["user"] as AnyObject?
+                    let waiting_member_array = user_array!["waiting_member"] as AnyObject?
+                    if waiting_member_array!.count == 3 {
+                        self.appDelegate.your_id = waiting_member_array?[2] as AnyObject?
+                        self.performSegue(withIdentifier: "SegueId", sender: self)
                     }
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
                 print("well done")
             }
             
@@ -74,37 +74,34 @@ class StartViewController: UIViewController {
                 ref.child("user/waiting_member/\(my_id!)").setValue(my_id!)
                 self.appDelegate.my_id = my_id as AnyObject?
                 self.appDelegate.your_id = waiting_member_array?[1] as AnyObject?
+                self.performSegue(withIdentifier: "SegueId", sender: self)
             }
             
             //③waiting_memberに3人入ってしまった時の処理
             
             
-           
-            /*
-            ref.child("user/waiting_member/\(my_id!)").setValue(my_id!)
-            self.appDelegate.my_id = all_member_array?.count as AnyObject
             
-            self.appDelegate.my_id = all_member_array?.count as AnyObject?
-            self.appDelegate.your_id = waiting_member_array?[1] as AnyObject?
+            
+            
+            /*
+             ref.child("user/waiting_member/\(my_id!)").setValue(my_id!)
+             self.appDelegate.my_id = all_member_array?.count as AnyObject
+             
+             self.appDelegate.my_id = all_member_array?.count as AnyObject?
+             self.appDelegate.your_id = waiting_member_array?[1] as AnyObject?
              ref.child("user/all_member/\(self.appDelegate.my_id!)").setValue(self.appDelegate.my_id!)
              ref.child("user/waiting_member/\((waiting_member_array?.count)!)").setValue(self.appDelegate.my_id!)
-           */
+             */
             
             
             
-           
+            
         }) { (error) in
             print(error.localizedDescription)
         }
         
         
-       
-                
-            
         
-      
-        
-        self.performSegue(withIdentifier: "SegueId", sender: self)
         /*
          ref.child("messages").child("-KzIaGarqKKCP7wkHf-E").observeSingleEvent(of: .value, with: { (snapshot) in
          // Get user value
@@ -117,36 +114,37 @@ class StartViewController: UIViewController {
          print(error.localizedDescription)
          }
          */
-       
-//        ref.child("user/01").setValue("2")
-//        ref.child("user/02").setValue("2")
-//        ref.child("user/02").setValue("3")
-//        ref.child("user/03")
- /*       for i in 0..<1{
-            ref.child("user/all_member/\(i)").setValue("must_not_delete")
-        }
-*/
-/*        let data = [0]
-        ref.child("user/all_member").setValue(data)
         
- */
+        //        ref.child("user/01").setValue("2")
+        //        ref.child("user/02").setValue("2")
+        //        ref.child("user/02").setValue("3")
+        //        ref.child("user/03")
+        /*       for i in 0..<1{
+         ref.child("user/all_member/\(i)").setValue("must_not_delete")
+         }
+         */
+        /*        let data = [0]
+         ref.child("user/all_member").setValue(data)
+         
+         */
         
     }
     
-  
+    
     
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
     
     
-
+    
 }
+

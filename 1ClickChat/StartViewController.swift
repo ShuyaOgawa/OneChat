@@ -58,7 +58,9 @@ class StartViewController: UIViewController {
                     let user_array = value?["user"] as AnyObject?
                     let waiting_member_array = user_array!["waiting_member"] as AnyObject?
                     if waiting_member_array!.count == 3 {
-                        self.appDelegate.your_id = waiting_member_array?[2] as AnyObject?
+                        let all_member_array = user_array!["all_member"] as AnyObject?
+                        let all_member_count = all_member_array?.count as Int?
+                        self.appDelegate.your_id = all_member_count! - 1 as AnyObject
                         self.performSegue(withIdentifier: "SegueId", sender: self)
                     }
                 }) { (error) in
@@ -73,7 +75,9 @@ class StartViewController: UIViewController {
                 print("pattern 2")
                 ref.child("user/waiting_member/\(my_id!)").setValue(my_id!)
                 self.appDelegate.my_id = my_id as AnyObject?
-                self.appDelegate.your_id = waiting_member_array?[1] as AnyObject?
+                let all_member_array = value?["all_member"] as AnyObject?
+                let all_member_count = all_member_array?.count as Int?
+                self.appDelegate.your_id = all_member_count! - 1 as AnyObject
                 self.performSegue(withIdentifier: "SegueId", sender: self)
             }
             
@@ -82,19 +86,7 @@ class StartViewController: UIViewController {
             
             
             
-            
-            /*
-             ref.child("user/waiting_member/\(my_id!)").setValue(my_id!)
-             self.appDelegate.my_id = all_member_array?.count as AnyObject
-             
-             self.appDelegate.my_id = all_member_array?.count as AnyObject?
-             self.appDelegate.your_id = waiting_member_array?[1] as AnyObject?
-             ref.child("user/all_member/\(self.appDelegate.my_id!)").setValue(self.appDelegate.my_id!)
-             ref.child("user/waiting_member/\((waiting_member_array?.count)!)").setValue(self.appDelegate.my_id!)
-             */
-            
-            
-            
+        
             
         }) { (error) in
             print(error.localizedDescription)
@@ -102,31 +94,6 @@ class StartViewController: UIViewController {
         
         
         
-        /*
-         ref.child("messages").child("-KzIaGarqKKCP7wkHf-E").observeSingleEvent(of: .value, with: { (snapshot) in
-         // Get user value
-         let value = snapshot.value as? NSDictionary
-         print(value)
-         let username = value?["text"] as? String ?? ""
-         print("aaaaaaaaaaaaaaa")
-         print(username)
-         }) { (error) in
-         print(error.localizedDescription)
-         }
-         */
-        
-        //        ref.child("user/01").setValue("2")
-        //        ref.child("user/02").setValue("2")
-        //        ref.child("user/02").setValue("3")
-        //        ref.child("user/03")
-        /*       for i in 0..<1{
-         ref.child("user/all_member/\(i)").setValue("must_not_delete")
-         }
-         */
-        /*        let data = [0]
-         ref.child("user/all_member").setValue(data)
-         
-         */
         
     }
     

@@ -145,4 +145,5 @@ class ViewController: JSQMessagesViewController {
         ref.child("messages").childByAutoId().setValue(["senderId": senderId, "text": text, "displayName": senderDisplayName, "date": [".sv": "timestamp"]])
     }
     
+    
 }

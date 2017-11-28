@@ -17,107 +17,101 @@ class ViewController: JSQMessagesViewController {
     var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
     
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        senderDisplayName = "tsuru"
-        senderId = "Tsuru"
-        let ref = Database.database().reference()
-        ref.observe(.value, with: { snapshot in
-            guard let dic = snapshot.value as? Dictionary<String, AnyObject> else {
-                return
-            }
-            guard let posts = dic["messages"] as? Dictionary<String, Dictionary<String, AnyObject>> else {
-                return
-            }
-            // keyとdateが入ったタプルを作る
-            var keyValueArray: [(String, Int)] = []
-            for (key, value) in posts {
-                keyValueArray.append((key: key, date: value["date"] as! Int))
-            }
-            keyValueArray.sort{$0.1 < $1.1}
-            // タプルの中のdate でソートしてタプルの順番を揃える(配列で) これでkeyが順番通りになる
-            // messagesを再構成
-            var preMessages = [JSQMessage]()
-            for sortedTuple in keyValueArray {
-                for (key, value) in posts {
-                    if key == sortedTuple.0 {           // 揃えた順番通りにメッセージを作成
-                        let senderId = value["senderId"] as! String!
-                        let text = value["text"] as! String!
-                        let displayName = value["displayName"] as! String!
-                        preMessages.append(JSQMessage(senderId: senderId, displayName: displayName, text: text))
-                    }
-                }
-            }
-            self.messages = preMessages
-            
-            self.collectionView.reloadData()
-        })
-    }
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        
-        
         let my_id = self.appDelegate.my_id!
         let your_id = self.appDelegate.your_id!
-        print("my_id",my_id)
-        print("your_id",your_id)
+        
+        senderDisplayName = String(describing: my_id)
+        senderId = String(describing: your_id)
         
         
         let ref = Database.database().reference()
         ref.observe(.value, with: { snapshot in
-            guard let dic = snapshot.value as? Dictionary<String, AnyObject> else {
-                return
-            }
-            guard let posts = dic["messages"] as? Dictionary<String, Dictionary<String, AnyObject>> else {
-                return
-            }
-            // keyとdateが入ったタプルを作る
-            var keyValueArray: [(String, Int)] = []
-            for (key, value) in posts {
-                keyValueArray.append((key: key, date: value["date"] as! Int))
-            }
-            keyValueArray.sort{$0.1 < $1.1}
-            // タプルの中のdate でソートしてタプルの順番を揃える(配列で) これでkeyが順番通りになる
-            // messagesを再構成
-            var preMessages = [JSQMessage]()
-            for sortedTuple in keyValueArray {
-                for (key, value) in posts {
-                    if key == sortedTuple.0 {           // 揃えた順番通りにメッセージを作成
-                        let senderId = value["senderId"] as! String!
-                        let text = value["text"] as! String!
-                        let displayName = value["displayName"] as! String!
-                        preMessages.append(JSQMessage(senderId: senderId, displayName: displayName, text: text))
+            sleep(UInt32(0.5))
+            let value = snapshot.value as? NSDictionary
+            let whole_chat_room = value?["chat_room"] as AnyObject?
+          
+            if Int(my_id as! NSNumber) < Int(your_id as! NSNumber) {
+                
+                print("value", value)
+                print("whole_chat", whole_chat_room)
+                let chat_room = whole_chat_room?["\(my_id)&\(your_id)"] as! Dictionary<String, String>
+              
+                print(chat_room)
+                for (key, value) in chat_room {
+                    
+                    
+                    if key == String(describing: my_id) {
+                        let text = value
+                        self.messages.append(JSQMessage(senderId: String(describing: your_id), displayName: String(describing: my_id), text: (text as! String)))
+                    }
+                    
+                    if key == String(describing: your_id) {
+                        let text = value
+                        self.messages.append(JSQMessage(senderId: String(describing: my_id), displayName: String(describing: your_id), text: (text as! String)))
                     }
                 }
+                
+                
+                self.collectionView.reloadData()
             }
-            self.messages = preMessages
+           
             
-            self.collectionView.reloadData()
+            
+            if Int(my_id as! NSNumber) > Int(your_id as! NSNumber) {
+                let chat_room = whole_chat_room?["\(your_id)&\(my_id)"] as! Dictionary<String, AnyObject>
+            
+                for (key, value) in chat_room {
+                    
+                    if key == String(describing: my_id) {
+                        let text = value
+                        self.messages.append(JSQMessage(senderId: String(describing: your_id), displayName: String(describing: my_id), text: (text as! String)))
+                    }
+                    
+                    if key == String(describing: your_id) {
+                        let text = value
+                        self.messages.append(JSQMessage(senderId: String(describing: my_id), displayName: String(describing: your_id), text: (text as! String)))
+                    }
+                }
+                
+                
+                self.collectionView.reloadData()
+            }
+         
         })
-        
     }
     
     
     
+    
+    
+ 
+    
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
+        print("1")
         return messages[indexPath.row]
     }
     
     // コメントの背景色の指定
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
+         print("2")
         if messages[indexPath.row].senderId == senderId {
             return JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImage(with: UIColor(red: 112/255, green: 192/255, blue:  75/255, alpha: 1))
         } else {
             return JSQMessagesBubbleImageFactory().incomingMessagesBubbleImage(with: UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1))
         }
         
+       
+        
     }
     
     // コメントの文字色の指定
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+         print("3")
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
         if messages[indexPath.row].senderId == senderId {
             cell.textView.textColor = UIColor.white
@@ -129,6 +123,7 @@ class ViewController: JSQMessagesViewController {
     
     // メッセージの数
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+         print("4")
         return messages.count
     }
     
@@ -149,9 +144,14 @@ class ViewController: JSQMessagesViewController {
     
     // 送信ボタンを押した時の処理
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
+         print("6")
         inputToolbar.contentView.textView.text = ""
         let ref = Database.database().reference()
-        ref.child("messages").childByAutoId().setValue(["senderId": senderId, "text": text, "displayName": senderDisplayName, "date": [".sv": "timestamp"]])
+        let my_id = self.appDelegate.my_id!
+        let your_id = self.appDelegate.your_id!
+        let senderDisplayName = String(describing: my_id)
+        let senderId = String(describing: your_id)
+        ref.child("chat_room/\(my_id)&\(your_id)/\(senderDisplayName)").setValue(text)
     }
     
     

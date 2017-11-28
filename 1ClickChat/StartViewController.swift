@@ -48,17 +48,17 @@ class StartViewController: UIViewController {
             ref.child("user/all_member/\(my_id!)").setValue(my_id!)
             let waiting_member_array = value?["waiting_member"] as AnyObject?
             
+            print("waiting_member_array?.count", waiting_member_array?.count)
             //①自分が1人目のパターン
             if waiting_member_array?.count == 1{
                 
                 //ローディング
                 self.loading()
-               
-                print("pattern 1")
                 ref.child("user/waiting_member/\(my_id!)").setValue(my_id!)
                 self.appDelegate.my_id = my_id! as AnyObject
                 //2人目のユーザーが来るまでデータ取得
                 ref.observe(.value, with: { snapshot in
+                    sleep(UInt32(0.5))
                     let value = snapshot.value as? NSDictionary
                     let user_array = value?["user"] as AnyObject?
                     let waiting_member_array = user_array!["waiting_member"] as AnyObject?
@@ -69,10 +69,7 @@ class StartViewController: UIViewController {
                         
                         //ロード終了
                         self.ActivityIndicator.stopAnimating()
-                        
-                        
-                        self.performSegue(withIdentifier: "SegueId", sender: self)
-                        
+
                         //chat_roomを作る
                         self.set_chat_room(my_id: self.appDelegate.my_id as! Int, your_id: self.appDelegate.your_id as! Int)
                         
@@ -81,7 +78,6 @@ class StartViewController: UIViewController {
                 }) { (error) in
                     print(error.localizedDescription)
                 }
-                print("well done")
             }
             
             
@@ -111,11 +107,12 @@ class StartViewController: UIViewController {
     //chat_roomを作りwaiting_memberから削除する
     func set_chat_room(my_id: Int, your_id: Int){
         let ref = Database.database().reference()
-        ref.child("chat_room/\(my_id)&\(your_id)/\(my_id)").setValue("~~~~")
+        ref.child("chat_room/\(my_id)&\(your_id)/\(my_id)").setValue("~~~")
         ref.child("chat_room/\(my_id)&\(your_id)/\(your_id)").setValue("~~~~")
         //waiting_member消す
         ref.child("user/waiting_member/\(my_id)").removeValue()
         ref.child("user/waiting_member/\(your_id)").removeValue()
+        self.performSegue(withIdentifier: "SegueId", sender: self)
     }
    
     

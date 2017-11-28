@@ -42,15 +42,19 @@ class StartViewController: UIViewController {
         
         ref.child("user").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
-            let value = snapshot.value as? NSDictionary
-            let all_member_array = value?["all_member"] as AnyObject?
-            let my_id = all_member_array?.count
+            let value = snapshot.value as! NSDictionary
+            let all_member_array = value["all_member"] as AnyObject
+            let my_id = all_member_array.count
             ref.child("user/all_member/\(my_id!)").setValue(my_id!)
-            let waiting_member_array = value?["waiting_member"] as AnyObject?
+            let waiting_member_array = value["waiting_member"] as AnyObject
             
-            print("waiting_member_array?.count", waiting_member_array?.count)
+            
+            print(waiting_member_array)
+            
+            
+            print("waiting_member_array?.count", waiting_member_array.count)
             //①自分が1人目のパターン
-            if waiting_member_array?.count == 1{
+            if waiting_member_array.count == 1{
                 
                 //ローディング
                 self.loading()
@@ -82,11 +86,11 @@ class StartViewController: UIViewController {
             
             
             //②自分が２人目のパターン
-            if waiting_member_array?.count == 2{
+            if waiting_member_array.count == 2{
                 print("pattern 2")
                 ref.child("user/waiting_member/\(my_id!)").setValue(my_id!)
                 self.appDelegate.my_id = my_id as AnyObject?
-                let all_member_array = value?["all_member"] as AnyObject?
+                let all_member_array = value["all_member"] as AnyObject?
                 let all_member_count = all_member_array?.count as Int?
                 self.appDelegate.your_id = all_member_count! - 1 as AnyObject
                 self.performSegue(withIdentifier: "SegueId", sender: self)

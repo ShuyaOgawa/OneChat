@@ -32,14 +32,19 @@ class ViewController: JSQMessagesViewController {
         let ref = Database.database().reference()
         ref.observe(.value, with: { snapshot in
             sleep(UInt32(0.5))
-            let value = snapshot.value as? NSDictionary
-            let whole_chat_room = value?["chat_room"] as AnyObject?
+            let value = snapshot.value as! NSDictionary
+            let whole_chat_room = value["chat_room"] as AnyObject
           
-            if Int(my_id as! NSNumber) < Int(your_id as! NSNumber) {
+            if Int(truncating: my_id as! NSNumber) < Int(truncating: your_id as! NSNumber) {
                 
                 print("value", value)
                 print("whole_chat", whole_chat_room)
-                let chat_room = whole_chat_room?["\(my_id)&\(your_id)"] as! Dictionary<String, String>
+                print("type", type(of: whole_chat_room))
+                guard let chat_room = whole_chat_room["\(my_id)&\(your_id)"] as? Dictionary<String, AnyObject>
+                else {
+                    return
+                }
+                
               
                 print(chat_room)
                 for (key, value) in chat_room {
@@ -47,12 +52,12 @@ class ViewController: JSQMessagesViewController {
                     
                     if key == String(describing: my_id) {
                         let text = value
-                        self.messages.append(JSQMessage(senderId: String(describing: your_id), displayName: String(describing: my_id), text: (text as! String)))
+                        self.messages.append(JSQMessage(senderId: String(describing: your_id), displayName: String(describing: my_id), text: (text as! String )))
                     }
                     
                     if key == String(describing: your_id) {
                         let text = value
-                        self.messages.append(JSQMessage(senderId: String(describing: my_id), displayName: String(describing: your_id), text: (text as! String)))
+                        self.messages.append(JSQMessage(senderId: String(describing: my_id), displayName: String(describing: your_id), text: (text as! String )))
                     }
                 }
                 
@@ -62,8 +67,11 @@ class ViewController: JSQMessagesViewController {
            
             
             
-            if Int(my_id as! NSNumber) > Int(your_id as! NSNumber) {
-                let chat_room = whole_chat_room?["\(your_id)&\(my_id)"] as! Dictionary<String, AnyObject>
+            if Int(truncating: my_id as! NSNumber) > Int(truncating: your_id as! NSNumber) {
+                guard let chat_room = whole_chat_room["\(your_id)&\(my_id)"] as? Dictionary<String, AnyObject>
+                    else {
+                        return
+                }
             
                 for (key, value) in chat_room {
                     
@@ -151,7 +159,12 @@ class ViewController: JSQMessagesViewController {
         let your_id = self.appDelegate.your_id!
         let senderDisplayName = String(describing: my_id)
         let senderId = String(describing: your_id)
-        ref.child("chat_room/\(my_id)&\(your_id)/\(senderDisplayName)").setValue(text)
+        if Int(truncating: my_id as! NSNumber) < Int(truncating: your_id as! NSNumber) {
+            ref.child("chat_room/\(my_id)&\(your_id)/\(senderDisplayName)").setValue(text)
+        }
+        if Int(truncating: my_id as! NSNumber) > Int(truncating: your_id as! NSNumber) {
+            ref.child("chat_room/\(your_id)&\(my_id)/\(senderDisplayName)").setValue(text)
+        }
     }
     
     

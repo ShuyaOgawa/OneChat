@@ -21,7 +21,7 @@ class ViewController: JSQMessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("ggggggggggggggggggg")
         let my_id = self.appDelegate.my_id!
         let your_id = self.appDelegate.your_id!
         
@@ -31,32 +31,33 @@ class ViewController: JSQMessagesViewController {
         
         let ref = Database.database().reference()
         ref.observe(.value, with: { snapshot in
-            
+            print("hhhhhhhhhhhhhhhhhhhhhhhh")
             let value = snapshot.value as! NSDictionary
             let whole_chat_room = value["chat_room"] as AnyObject
            
            
             if Int(truncating: my_id as! NSNumber) < Int(truncating: your_id as! NSNumber) {
+                print("iiiiiiiiiiiiiiiiii")
                 
                 //                guard let chat_room = whole_chat_room["\(my_id)&\(your_id)"] as? Dictionary<String, AnyObject> else { return }
                 guard let chat_room = whole_chat_room["\(my_id)&\(your_id)"] as? Dictionary<String, AnyObject> else { return }
-                
                 print("chat_room", chat_room)
+                print("jjjjjjjjjjjjjjjjjj")
                 guard let number_of_chat = chat_room.count - 1 as? Int else { return }
                 guard let chat_room_content = chat_room["\(number_of_chat)"] as? Dictionary<String, AnyObject> else { return }
                 print("chat_room_content", chat_room_content)
-              
+                print("kkkkkkkkkkkkkkkkkkkkkk")
                 for (key, value) in chat_room_content {
-                    
+                    print("lllllllllllllllllllllllll")
                     if key == String(describing: my_id) {
                         let text = value
-                        
+                        print("mmmmmmmmmmmmmmmmm")
                         self.messages.append(JSQMessage(senderId: String(describing: your_id), displayName: String(describing: my_id), text: (text as! String )))
                     }
                     
                     if key == String(describing: your_id) {
                         let text = value
-                        
+                        print("nnnnnnnnnnnnnnnn")
                         self.messages.append(JSQMessage(senderId: String(describing: my_id), displayName: String(describing: your_id), text: (text as! String )))
                     }
                 }
@@ -68,17 +69,25 @@ class ViewController: JSQMessagesViewController {
             
             
             if Int(truncating: my_id as! NSNumber) > Int(truncating: your_id as! NSNumber) {
+                //                guard let chat_room = whole_chat_room["\(my_id)&\(your_id)"] as? Dictionary<String, AnyObject> else { return }
                 guard let chat_room = whole_chat_room["\(your_id)&\(my_id)"] as? Dictionary<String, AnyObject> else { return }
-            
-                for (key, value) in chat_room {
-                    
+                print("oooooooooooooooooooo")
+               
+                guard let number_of_chat = chat_room.count - 1 as? Int else { return }
+                guard let chat_room_content = chat_room["\(number_of_chat)"] as? Dictionary<String, AnyObject> else { return }
+               
+                print("qqqqqqqqqqqqqq")
+                for (key, value) in chat_room_content {
+                    print("rrrrrrrrrrrrrrr")
                     if key == String(describing: my_id) {
                         let text = value
+                        print("ssssssssssssss")
                         self.messages.append(JSQMessage(senderId: String(describing: your_id), displayName: String(describing: my_id), text: (text as! String)))
                     }
                     
                     if key == String(describing: your_id) {
                         let text = value
+                        print("tttttttttttttt")
                         self.messages.append(JSQMessage(senderId: String(describing: my_id), displayName: String(describing: your_id), text: (text as! String)))
                     }
                 }

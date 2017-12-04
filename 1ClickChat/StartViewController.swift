@@ -9,8 +9,9 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import VideoSplashKit
 
-class StartViewController: UIViewController {
+class StartViewController: VideoSplashViewController {
     
     var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
     var ActivityIndicator: UIActivityIndicatorView!
@@ -19,8 +20,7 @@ class StartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let ref = Database.database().reference()
+        setupVideo()
      /*   ref.child("user/all_member/0").setValue("must_not_delete")
         ref.child("user/waiting_member/0").setValue("must_not_delete")
         ref.child("chat_room/n1&n2/n1").setValue("~~~~")
@@ -34,6 +34,22 @@ class StartViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func setupVideo() {
+        if let path = Bundle.main.path(forResource: "live-aloha", ofType: "mp4") {
+            let url = NSURL.fileURL(withPath: path)
+            videoFrame = view.frame
+            fillMode = .resizeAspectFill
+            alwaysRepeat = true
+            restartForeground = true
+            sound = true
+            startTime = 0.0
+            duration = 0.0
+            alpha = 0.7
+            backgroundColor = UIColor.black
+            contentURL = url
+        }
     }
     
     

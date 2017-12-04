@@ -14,6 +14,10 @@
 		9811F7351FA05C69004DAABB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9811F7331FA05C69004DAABB /* LaunchScreen.storyboard */; };
 		983C3E391FC14785002BE941 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 983C3E381FC14785002BE941 /* GoogleService-Info.plist */; };
 		983C3E3B1FC153A7002BE941 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983C3E3A1FC153A7002BE941 /* StartViewController.swift */; };
+		98CA71161FD52B6D0096268D /* DesignEvo.png in Resources */ = {isa = PBXBuildFile; fileRef = 98CA71151FD52B6D0096268D /* DesignEvo.png */; };
+		98CA71181FD52BF30096268D /* DesignEvo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 98CA71171FD52BF30096268D /* DesignEvo.jpg */; };
+		98D33C591FD3DF40000D5D9B /* live-aloha.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 98D33C581FD3DF40000D5D9B /* live-aloha.mp4 */; };
+		98D33C5A1FD3E06F000D5D9B /* VideoSplashKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D33C5B1FD3E06F000D5D9B /* VideoSplashKit.framework */; };
 		ECDE00637453AC7636B76E4C /* Pods_1ClickChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FEE0A9F7BDB54E2B810FD91 /* Pods_1ClickChat.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +33,10 @@
 		9811F7361FA05C69004DAABB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		983C3E381FC14785002BE941 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		983C3E3A1FC153A7002BE941 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		98CA71151FD52B6D0096268D /* DesignEvo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DesignEvo.png; path = "../../../Downloads/designevo-7/DesignEvo.png"; sourceTree = "<group>"; };
+		98CA71171FD52BF30096268D /* DesignEvo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = DesignEvo.jpg; path = "../../../Downloads/designevo-7/DesignEvo.jpg"; sourceTree = "<group>"; };
+		98D33C581FD3DF40000D5D9B /* live-aloha.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "live-aloha.mp4"; path = "../../../Downloads/live-aloha.mp4"; sourceTree = "<group>"; };
+		98D33C5B1FD3E06F000D5D9B /* VideoSplashKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = VideoSplashKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9961C3F1EDE1EA13067B5858 /* Pods-1ClickChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-1ClickChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-1ClickChat/Pods-1ClickChat.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -37,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98D33C5A1FD3E06F000D5D9B /* VideoSplashKit.framework in Frameworks */,
 				ECDE00637453AC7636B76E4C /* Pods_1ClickChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -47,6 +56,7 @@
 		02D27A06B617A1DCAE3FA7D2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				98D33C5B1FD3E06F000D5D9B /* VideoSplashKit.framework */,
 				1FEE0A9F7BDB54E2B810FD91 /* Pods_1ClickChat.framework */,
 			);
 			name = Frameworks;
@@ -87,7 +97,10 @@
 				9811F72C1FA05C69004DAABB /* ViewController.swift */,
 				983C3E3A1FC153A7002BE941 /* StartViewController.swift */,
 				9811F7311FA05C69004DAABB /* Assets.xcassets */,
+				98D33C581FD3DF40000D5D9B /* live-aloha.mp4 */,
 				983C3E381FC14785002BE941 /* GoogleService-Info.plist */,
+				98CA71151FD52B6D0096268D /* DesignEvo.png */,
+				98CA71171FD52BF30096268D /* DesignEvo.jpg */,
 				9811F7331FA05C69004DAABB /* LaunchScreen.storyboard */,
 				9811F7361FA05C69004DAABB /* Info.plist */,
 			);
@@ -158,7 +171,10 @@
 			files = (
 				9811F7351FA05C69004DAABB /* LaunchScreen.storyboard in Resources */,
 				983C3E391FC14785002BE941 /* GoogleService-Info.plist in Resources */,
+				98CA71161FD52B6D0096268D /* DesignEvo.png in Resources */,
 				9811F7321FA05C69004DAABB /* Assets.xcassets in Resources */,
+				98D33C591FD3DF40000D5D9B /* live-aloha.mp4 in Resources */,
+				98CA71181FD52BF30096268D /* DesignEvo.jpg in Resources */,
 				9811F7301FA05C69004DAABB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,6 +209,7 @@
 				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/VideoSplashKit/VideoSplashKit.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -203,6 +220,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VideoSplashKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);

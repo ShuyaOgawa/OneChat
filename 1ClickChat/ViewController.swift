@@ -21,10 +21,12 @@ class ViewController: JSQMessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         print("ggggggggggggggggggg")
         let my_id = self.appDelegate.my_id!
         let your_id = self.appDelegate.your_id!
-        
+        print("my_id", my_id)
+        print("your_id", your_id)
         senderDisplayName = String(describing: my_id)
         senderId = String(describing: your_id)
         
@@ -99,7 +101,27 @@ class ViewController: JSQMessagesViewController {
         })
     }
     
-    
+
+    //添付ボタン＝ログアウトボタン
+    override func didPressAccessoryButton(_ sender: UIButton!) {
+        let alert: UIAlertController = UIAlertController(title: "", message: "チャットを終了してもよろしいですか？", preferredStyle:  UIAlertControllerStyle.alert)
+        
+        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            var my_id: AnyObject?
+            var your_id: AnyObject?
+            print("my_id", my_id)
+            self.performSegue(withIdentifier: "SegueId2", sender: self)
+        })
+        let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+        })
+        alert.addAction(cancelAction)
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
+    }
     
     
     

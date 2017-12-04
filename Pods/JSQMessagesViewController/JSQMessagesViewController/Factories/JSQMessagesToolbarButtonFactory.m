@@ -27,7 +27,10 @@
 
 + (UIButton *)defaultAccessoryButtonItem
 {
-    UIImage *accessoryImage = [UIImage jsq_defaultAccessoryImage];
+//    UIImage *accessoryImage = [UIImage jsq_defaultAccessoryImage];
+    NSURL *myURL = [NSURL URLWithString:@"https://png.icons8.com/ios7/25/close-window.png"];
+    NSData * myData = [NSData dataWithContentsOfURL:myURL];
+    UIImage *accessoryImage = [UIImage imageWithData:myData];
     UIImage *normalImage = [accessoryImage jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
     UIImage *highlightedImage = [accessoryImage jsq_imageMaskedWithColor:[UIColor darkGrayColor]];
 

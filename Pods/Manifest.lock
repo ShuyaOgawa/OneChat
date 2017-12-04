@@ -53,6 +53,7 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - SwiftyJSON (3.1.4)
+  - VideoSplashKit (1.2.1)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -61,6 +62,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - JSQMessagesViewController
   - SwiftyJSON
+  - VideoSplashKit
 
 SPEC CHECKSUMS:
   Firebase: 3e92884a63e8f76d107c43a67d2ab9071e1eda10
@@ -77,7 +79,8 @@ SPEC CHECKSUMS:
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  VideoSplashKit: 9d5670948cfb0be15262d973cedbfd3faecddcad
 
-PODFILE CHECKSUM: 99c11fe3aaf50c0ed66d92d9efb7b585beb90c57
+PODFILE CHECKSUM: b769821ce62f9c61782ab2cb1a3c4217a274502e
 
 COCOAPODS: 1.3.1

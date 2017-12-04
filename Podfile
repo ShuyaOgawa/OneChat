@@ -10,6 +10,7 @@ pod 'Firebase/Auth'
 pod 'Firebase/Storage'
 pod 'Firebase/Database'
 pod “SwiftyJSON”
+pod 'VideoSplashKit', :inhibit_warnings => true
 
   # Pods for 1ClickChat
 

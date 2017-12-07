@@ -22,33 +22,29 @@ class ViewController: JSQMessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
+        
         let my_id = self.appDelegate.my_id!
         let your_id = self.appDelegate.your_id!
-        print("111111111",type(of: my_id))
+        print("111111111", my_id)
         print("111111111",your_id)
+        print("11111111-----------", self.appDelegate.my_id!)
+        print("1111111111------------", self.appDelegate.your_id!)
         
         senderDisplayName = String(describing: my_id)
         senderId = String(describing: your_id)
-       
+        
         let ref = Database.database().reference()
         ref.observe(.value, with: { snapshot in
-            if (self.appDelegate.my_id != nil || self.appDelegate.your_id != nil) {
-                print("22222222226666666666666666", my_id)
-                print("22222222226666666666", your_id)
+            if (self.appDelegate.my_id != nil && self.appDelegate.your_id != nil) {
                 let my_id = self.appDelegate.my_id!
                 let your_id = self.appDelegate.your_id!
+                
                 print("2222222222", my_id)
                 print("2222222222", your_id)
                 let value = snapshot.value as! NSDictionary
                 let whole_chat_room = value["chat_room"] as AnyObject
                 
-                //チャット終了処理
-                if (my_id == nil || your_id == nil) {
-                    print("44444444", my_id)
-                    print("44444444", your_id)
-                    self.end_of_chat()
-                }
+                
                 
                 
                 if Int(truncating: my_id as! NSNumber) < Int(truncating: your_id as! NSNumber) {
@@ -81,15 +77,19 @@ class ViewController: JSQMessagesViewController {
                 
                 
                 if Int(truncating: my_id as! NSNumber) > Int(truncating: your_id as! NSNumber) {
-                    
-                    
+                    print("33333333333333", my_id)
+                    print("33333333333", your_id)
+                    print("313131313131", self.appDelegate.my_id!)
+                    print("313131313131", self.appDelegate.your_id!)
+                    print("check0")
                     //                guard let chat_room = whole_chat_room["\(my_id)&\(your_id)"] as? Dictionary<String, AnyObject> else { return }
                     guard let chat_room = whole_chat_room["\(your_id)&\(my_id)"] as? Dictionary<String, AnyObject> else { return }
-                    
-                   
-                    guard let number_of_chat = chat_room.count - 1 as? Int else { return }
+                    print("check1", my_id, your_id)
+                    print("check1", chat_room)
+                    guard let number_of_chat = (chat_room.count) - 1 as? Int else { return }
+                    print("check2")
                     guard let chat_room_content = chat_room["\(number_of_chat)"] as? Dictionary<String, AnyObject> else { return }
-                   
+                    print("check3")
                    
                     for (key, value) in chat_room_content {
                         if key == String(describing: my_id) {
@@ -132,6 +132,7 @@ class ViewController: JSQMessagesViewController {
                     let number_of_chat = chat_room.count
                     let text = "退出しました。"
                     ref.child("chat_room/\(my_id)&\(your_id)/\(number_of_chat!)").updateChildValues(["\(my_id)": text])
+                    ref.removeAllObservers()
                 }) { (error) in
                     print(error.localizedDescription)
                 }
@@ -167,10 +168,16 @@ class ViewController: JSQMessagesViewController {
     }
     
     func end_of_chat () {
+        let ref = Database.database().reference()
         let alert: UIAlertController = UIAlertController(title: "チャットが終了しました", message: "ホームに戻ります。", preferredStyle:  UIAlertControllerStyle.alert)
         let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
+            ref.removeAllObservers()
+            let my_id: AnyObject? = nil
+            let your_id: AnyObject? = nil
+            self.appDelegate.my_id = nil
+            self.appDelegate.your_id = nil
             self.performSegue(withIdentifier: "SegueId2", sender: self)
             print("5555555555", self.appDelegate.my_id)
             print("55555555", self.appDelegate.your_id)
@@ -180,12 +187,7 @@ class ViewController: JSQMessagesViewController {
     }
     
     
-    override func viewDidDisappear(_ animated: Bool) {
-        var my_id: AnyObject?  = nil
-        var your_id: AnyObject? = nil
-        self.appDelegate.my_id = nil
-        self.appDelegate.your_id = nil
-    }
+    
  
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {

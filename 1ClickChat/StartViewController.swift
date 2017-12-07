@@ -55,13 +55,13 @@ class StartViewController: VideoSplashViewController {
     
     
     @IBAction func StartButton(_ sender: UIButton) {
+        let my_id: AnyObject? = nil
+        let your_id: AnyObject? = nil
+        self.appDelegate.my_id = nil
+        self.appDelegate.your_id = nil
         print("66666666", self.appDelegate.my_id)
         print("6666666666", self.appDelegate.your_id)
         button.isEnabled = false
-        var my_id: AnyObject?  = nil
-        var your_id: AnyObject? = nil
-        self.appDelegate.my_id = nil
-        self.appDelegate.your_id = nil
         print("66666666888888888888", self.appDelegate.my_id)
         print("666666666688888888888888", self.appDelegate.your_id)
         let ref = Database.database().reference()
@@ -93,12 +93,11 @@ class StartViewController: VideoSplashViewController {
                 print("99999999992222222222222", self.appDelegate.your_id)
                 //2人目のユーザーが来るまでデータ取得
                 ref.observe(.value, with: { snapshot in
-                   
+                    print("error")
                     let value = snapshot.value as? NSDictionary
                     let user_array = value?["user"] as AnyObject?
                     let waiting_member_array = user_array!["waiting_member"] as AnyObject?
                     if waiting_member_array!.count == 3 {
-                        
                         let all_member_array = user_array!["all_member"] as AnyObject?
                         let all_member_count = all_member_array?.count as Int?
                         self.appDelegate.your_id = all_member_count! - 1 as AnyObject
@@ -122,9 +121,13 @@ class StartViewController: VideoSplashViewController {
                
                 ref.child("user/waiting_member/\(my_id!)").setValue(my_id!)
                 self.appDelegate.my_id = my_id as AnyObject?
+                print("2 pattern", self.appDelegate.my_id)
                 let all_member_array = value["all_member"] as AnyObject?
                 let all_member_count = all_member_array?.count as Int?
                 self.appDelegate.your_id = all_member_count! - 1 as AnyObject
+                print("2 pattern", self.appDelegate.your_id)
+                print("self.appDelegate.my_id", self.appDelegate.my_id!)
+                print("self.appDelegate.your_id", self.appDelegate.your_id!)
                 self.performSegue(withIdentifier: "SegueId", sender: self)
                
                 

@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,48 +22,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9yd-Ne-7nO">
-                                <rect key="frame" x="133" y="332" width="110" height="45"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                <state key="normal" title="はじめる"/>
-                                <connections>
-                                    <action selector="StartButton:" destination="UFi-GW-M6q" eventType="touchUpInside" id="MXS-0V-dEf"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OneChat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s1O-yd-CEh">
-                                <rect key="frame" x="51" y="144" width="273" height="118"/>
+                                <rect key="frame" x="86" y="144" width="203" height="118"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="s1O-yd-CEh" secondAttribute="height" multiplier="273:118" id="xmM-e4-Uom"/>
+                                    <constraint firstAttribute="height" constant="118" id="Hg3-Yb-sxA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="35"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBX-qG-DYK">
-                                <rect key="frame" x="147" y="427" width="83" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                <state key="normal" title="のぞく"/>
+                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBX-qG-DYK">
+                                <rect key="frame" x="122" y="555" width="130" height="45"/>
+                                <color key="backgroundColor" red="0.46488422930000001" green="0.46488422930000001" blue="0.46488422930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="plm-Q8-OSg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="みてみる">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9yd-Ne-7nO">
+                                <rect key="frame" x="122" y="468" width="130" height="45"/>
+                                <color key="backgroundColor" red="0.24534436689747896" green="0.77890220207253891" blue="0.52374472175372722" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="dgZ-vb-90j"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="はじめる">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="StartButton:" destination="UFi-GW-M6q" eventType="touchUpInside" id="MXS-0V-dEf"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="s1O-yd-CEh" firstAttribute="leading" secondItem="cTd-6f-TQQ" secondAttribute="leading" constant="51" id="KWu-EW-oie"/>
-                            <constraint firstItem="s1O-yd-CEh" firstAttribute="top" secondItem="cTd-6f-TQQ" secondAttribute="top" constant="124" id="PDn-Lf-7qs"/>
-                            <constraint firstItem="9yd-Ne-7nO" firstAttribute="top" secondItem="s1O-yd-CEh" secondAttribute="bottom" constant="70" id="Wre-XF-Wxy"/>
-                            <constraint firstItem="s1O-yd-CEh" firstAttribute="centerX" secondItem="e6j-fg-hZT" secondAttribute="centerX" id="ll2-Vq-oId"/>
-                            <constraint firstItem="s1O-yd-CEh" firstAttribute="centerX" secondItem="9yd-Ne-7nO" secondAttribute="centerX" id="sgJ-b2-3Xp"/>
+                            <constraint firstItem="LBX-qG-DYK" firstAttribute="leading" secondItem="cTd-6f-TQQ" secondAttribute="leading" constant="122" id="5iT-m6-5fr"/>
+                            <constraint firstItem="LBX-qG-DYK" firstAttribute="top" secondItem="9yd-Ne-7nO" secondAttribute="bottom" constant="42" id="PQk-5x-YlO"/>
+                            <constraint firstItem="s1O-yd-CEh" firstAttribute="centerX" secondItem="9yd-Ne-7nO" secondAttribute="centerX" id="Pez-H4-Xgj"/>
+                            <constraint firstItem="s1O-yd-CEh" firstAttribute="centerX" secondItem="e6j-fg-hZT" secondAttribute="centerX" id="QnQ-pw-WSk"/>
+                            <constraint firstItem="s1O-yd-CEh" firstAttribute="top" secondItem="cTd-6f-TQQ" secondAttribute="top" constant="124" id="To9-RM-Nda"/>
+                            <constraint firstItem="LBX-qG-DYK" firstAttribute="leading" secondItem="9yd-Ne-7nO" secondAttribute="leading" id="mfP-Rh-PkU"/>
+                            <constraint firstItem="s1O-yd-CEh" firstAttribute="centerX" secondItem="LBX-qG-DYK" secondAttribute="centerX" id="pCz-24-NsD"/>
+                            <constraint firstItem="cTd-6f-TQQ" firstAttribute="bottom" secondItem="LBX-qG-DYK" secondAttribute="bottom" constant="67" id="pyu-jn-amM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cTd-6f-TQQ"/>
                     </view>
                     <connections>
-                        <outlet property="button" destination="9yd-Ne-7nO" id="7ms-8J-F2c"/>
+                        <outlet property="LookButton" destination="LBX-qG-DYK" id="ZFZ-ef-19X"/>
+                        <outlet property="StartButton" destination="9yd-Ne-7nO" id="wVN-NU-1aV"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="SegueId" id="Nt0-Qv-Pc2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mQY-bC-aqq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-382" y="-81"/>
+            <point key="canvasLocation" x="-639.20000000000005" y="-81.409295352323838"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">

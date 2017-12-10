@@ -16,11 +16,13 @@ class StartViewController: VideoSplashViewController {
     var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
     var ActivityIndicator: UIActivityIndicatorView!
     
-    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var StartButton: UIButton!
+    @IBOutlet weak var LookButton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        custom_button()
         setupVideo()
      /*   ref.child("user/all_member/0").setValue("must_not_delete")
         ref.child("user/waiting_member/0").setValue("must_not_delete")
@@ -29,7 +31,12 @@ class StartViewController: VideoSplashViewController {
        */
     }
     
-    
+    func custom_button() {
+        StartButton.layer.cornerRadius = 5
+        LookButton.layer.cornerRadius = 5
+//        StartButton.layer.borderWidth = 1
+//        StartButton.layer.borderColor = UIColor.black.cgColor
+    }
     
     
     override func didReceiveMemoryWarning() {
@@ -61,7 +68,7 @@ class StartViewController: VideoSplashViewController {
         self.appDelegate.your_id = nil
         print("66666666", self.appDelegate.my_id)
         print("6666666666", self.appDelegate.your_id)
-        button.isEnabled = false
+        StartButton.isEnabled = false
         print("66666666888888888888", self.appDelegate.my_id)
         print("666666666688888888888888", self.appDelegate.your_id)
         let ref = Database.database().reference()

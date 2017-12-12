@@ -15,6 +15,7 @@ class ViewController: JSQMessagesViewController {
     
     var messages = [JSQMessage]()
     var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    let ref = Database.database().reference()
     
     
     
@@ -33,8 +34,8 @@ class ViewController: JSQMessagesViewController {
         senderDisplayName = String(describing: my_id)
         senderId = String(describing: your_id)
         
-        let ref = Database.database().reference()
-        ref.observe(.value, with: { snapshot in
+        
+        self.ref.observe(.value, with: { snapshot in
             if (self.appDelegate.my_id != nil && self.appDelegate.your_id != nil) {
                 let my_id = self.appDelegate.my_id!
                 let your_id = self.appDelegate.your_id!
@@ -48,30 +49,36 @@ class ViewController: JSQMessagesViewController {
                 
                 
                 if Int(truncating: my_id as! NSNumber) < Int(truncating: your_id as! NSNumber) {
-                    
-                    //                guard let chat_room = whole_chat_room["\(my_id)&\(your_id)"] as? Dictionary<String, AnyObject> else { return }
+                                        //                guard let chat_room = whole_chat_room["\(my_id)&\(your_id)"] as? Dictionary<String, AnyObject> else { return }
                     guard let chat_room = whole_chat_room["\(my_id)&\(your_id)"] as? Dictionary<String, AnyObject> else { return }
-                    
                     guard let number_of_chat = chat_room.count - 1 as? Int else { return }
                     guard let chat_room_content = chat_room["\(number_of_chat)"] as? Dictionary<String, AnyObject> else { return }
                     for (key, value) in chat_room_content {
                         if key == String(describing: my_id) {
                             let text = value
-                            
+                            print("text", text)
+                            print("my_id", my_id)
+                            print("yyour_id", your_id)
                             self.messages.append(JSQMessage(senderId: String(describing: your_id), displayName: String(describing: my_id), text: (text as! String )))
+                            print("messages")
                         }
                         
                         if key == String(describing: your_id) {
                             let text = value
+                            print("yourtext", text)
                             if text as! String == "退出しました。" {
+                                print("getout", text)
                                 self.end_of_chat()
                             }
                             self.messages.append(JSQMessage(senderId: String(describing: my_id), displayName: String(describing: your_id), text: (text as! String )))
                         }
+                        
                     }
                     
                     
+                    print("beofre")
                     self.collectionView.reloadData()
+                    print("done")
                 }
                
                 
@@ -106,7 +113,10 @@ class ViewController: JSQMessagesViewController {
                             self.messages.append(JSQMessage(senderId: String(describing: my_id), displayName: String(describing: your_id), text: (text as! String)))
                         }
                     }
+                    print("beofre")
                     self.collectionView.reloadData()
+                    print("done")
+                    
                 }
                 }
             })
@@ -119,31 +129,31 @@ class ViewController: JSQMessagesViewController {
     override func didPressAccessoryButton(_ sender: UIButton!) {
         print("aaaaaaaaaaaaaaaaaaa")
         let alert: UIAlertController = UIAlertController(title: "", message: "チャットを終了してもよろしいですか？", preferredStyle:  UIAlertControllerStyle.alert)
-        let ref = Database.database().reference()
+        
         let my_id = self.appDelegate.my_id!
         let your_id = self.appDelegate.your_id!
         let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
             if Int(truncating: my_id as! NSNumber) < Int(truncating: your_id as! NSNumber) {
-                ref.child("chat_room").observeSingleEvent(of: .value, with: { (snapshot) in
+                self.self.ref.child("chat_room").observeSingleEvent(of: .value, with: { (snapshot) in
                     let value = snapshot.value as! NSDictionary
                     let chat_room = value["\(my_id)&\(your_id)"] as AnyObject
                     let number_of_chat = chat_room.count
                     let text = "退出しました。"
-                    ref.child("chat_room/\(my_id)&\(your_id)/\(number_of_chat!)").updateChildValues(["\(my_id)": text])
-                    ref.removeAllObservers()
+                    self.ref.child("chat_room/\(my_id)&\(your_id)/\(number_of_chat!)").updateChildValues(["\(my_id)": text])
+                    self.ref.removeAllObservers()
                 }) { (error) in
                     print(error.localizedDescription)
                 }
             }
             if Int(truncating: my_id as! NSNumber) > Int(truncating: your_id as! NSNumber) {
-                ref.child("chat_room").observeSingleEvent(of: .value, with: { (snapshot) in
+                self.ref.child("chat_room").observeSingleEvent(of: .value, with: { (snapshot) in
                     let value = snapshot.value as! NSDictionary
                     let chat_room = value["\(your_id)&\(my_id)"] as AnyObject
                     let number_of_chat = chat_room.count
                     let text = "退出しました。"
-                    ref.child("chat_room/\(your_id)&\(my_id)/\(number_of_chat!)").updateChildValues(["\(my_id)": text])
+                    self.ref.child("chat_room/\(your_id)&\(my_id)/\(number_of_chat!)").updateChildValues(["\(my_id)": text])
                 }) { (error) in
                     print(error.localizedDescription)
                 }
@@ -168,12 +178,16 @@ class ViewController: JSQMessagesViewController {
     }
     
     func end_of_chat () {
-        let ref = Database.database().reference()
+        
+        print("end_of_chat")
         let alert: UIAlertController = UIAlertController(title: "チャットが終了しました", message: "ホームに戻ります。", preferredStyle:  UIAlertControllerStyle.alert)
+        print("alert")
         let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
-            ref.removeAllObservers()
+            print("111111")
+            self.ref.removeAllObservers()
+            print("222222222")
             let my_id: AnyObject? = nil
             let your_id: AnyObject? = nil
             self.appDelegate.my_id = nil
@@ -246,7 +260,7 @@ class ViewController: JSQMessagesViewController {
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         
         inputToolbar.contentView.textView.text = ""
-        let ref = Database.database().reference()
+        
         let my_id = self.appDelegate.my_id!
         let your_id = self.appDelegate.your_id!
        
@@ -255,7 +269,7 @@ class ViewController: JSQMessagesViewController {
                 let value = snapshot.value as! NSDictionary
                 let chat_room = value["\(my_id)&\(your_id)"] as AnyObject
                 let number_of_chat = chat_room.count
-                ref.child("chat_room/\(my_id)&\(your_id)/\(number_of_chat!)").updateChildValues(["\(my_id)": text])
+                self.ref.child("chat_room/\(my_id)&\(your_id)/\(number_of_chat!)").updateChildValues(["\(my_id)": text])
             }) { (error) in
                 print(error.localizedDescription)
             }
@@ -265,7 +279,7 @@ class ViewController: JSQMessagesViewController {
                 let value = snapshot.value as! NSDictionary
                 let chat_room = value["\(your_id)&\(my_id)"] as AnyObject
                 let number_of_chat = chat_room.count
-                ref.child("chat_room/\(your_id)&\(my_id)/\(number_of_chat!)").updateChildValues(["\(my_id)": text])
+                self.ref.child("chat_room/\(your_id)&\(my_id)/\(number_of_chat!)").updateChildValues(["\(my_id)": text])
             }) { (error) in
                 print(error.localizedDescription)
             }

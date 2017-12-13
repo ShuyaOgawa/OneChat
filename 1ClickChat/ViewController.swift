@@ -15,8 +15,8 @@ class ViewController: JSQMessagesViewController {
     
     var messages = [JSQMessage]()
     var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    var ref2: DatabaseReference? = nil
-    var value: NSDictionary? = nil
+    weak var ref2: DatabaseReference? = nil
+    weak var value: NSDictionary? = nil
     var number_of_chat: Int? = nil
     
     

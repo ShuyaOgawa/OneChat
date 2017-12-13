@@ -31,6 +31,11 @@ class StartViewController: VideoSplashViewController {
        */
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+//        self.dismiss(animated: true, completion: nil)
+    }
+    
     func custom_button() {
         StartButton.layer.cornerRadius = 5
         LookButton.layer.cornerRadius = 5
@@ -66,17 +71,11 @@ class StartViewController: VideoSplashViewController {
         let your_id: AnyObject? = nil
         self.appDelegate.my_id = nil
         self.appDelegate.your_id = nil
-        print("66666666", self.appDelegate.my_id)
-        print("6666666666", self.appDelegate.your_id)
         StartButton.isEnabled = false
-        print("66666666888888888888", self.appDelegate.my_id)
-        print("666666666688888888888888", self.appDelegate.your_id)
         let ref = Database.database().reference()
         
         ref.child("user").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
-            print("7777777777", self.appDelegate.my_id)
-            print("7777777777", self.appDelegate.your_id)
             let value = snapshot.value as! NSDictionary
             let all_member_array = value["all_member"] as AnyObject
             let my_id = all_member_array.count
@@ -91,14 +90,10 @@ class StartViewController: VideoSplashViewController {
             
             //①自分が1人目のパターン
             if waiting_member_array.count == 1{
-                
                 //ローディング
                 self.loading()
-                
                 ref.child("user/waiting_member").updateChildValues(["\(my_id!)": my_id!])
                 self.appDelegate.my_id = my_id! as AnyObject
-                print("9999999999992222222222222", self.appDelegate.my_id)
-                print("99999999992222222222222", self.appDelegate.your_id)
                 //2人目のユーザーが来るまでデータ取得
                 ref.observe(.value, with: { snapshot in
                     print("error")
@@ -125,7 +120,6 @@ class StartViewController: VideoSplashViewController {
             
             //②自分が２人目のパターン
             if waiting_member_array.count == 2{
-               
                 ref.child("user/waiting_member").updateChildValues(["\(my_id!)": my_id!])
                 self.appDelegate.my_id = my_id as AnyObject?
                 print("2 pattern", self.appDelegate.my_id)
@@ -184,7 +178,15 @@ class StartViewController: VideoSplashViewController {
         self.ActivityIndicator.layer.opacity = 0.6
         //Viewに追加
         self.view.addSubview(self.ActivityIndicator)
-        
+        //テキスト
+        let label = UILabel()
+        label.frame = CGRect(x: 0, y: 0, width: 300, height: 30)
+        label.layer.position = CGPoint(x:ActivityIndicator.frame.width / 2.0 , y:ActivityIndicator.frame.height / 2.0 + 50.0)
+        label.text = "マッチング相手を探し中"
+        label.textAlignment = NSTextAlignment.center
+        label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = UIColor.white
+        ActivityIndicator.addSubview(label)
         //ロードスタート
         self.ActivityIndicator.startAnimating()
     }

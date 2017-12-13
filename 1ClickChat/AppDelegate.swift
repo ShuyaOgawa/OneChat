@@ -13,8 +13,8 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var my_id: AnyObject?
-    var your_id: AnyObject?
+    weak var my_id: AnyObject?
+    weak var your_id: AnyObject?
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?)

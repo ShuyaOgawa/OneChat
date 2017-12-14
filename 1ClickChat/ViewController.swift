@@ -24,7 +24,6 @@ class ViewController: JSQMessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         let my_id = self.appDelegate.my_id!
         let your_id = self.appDelegate.your_id!
         
@@ -59,6 +58,17 @@ class ViewController: JSQMessagesViewController {
         
     }
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("------------------",self.view.subviews.count)
+        let alert: UIAlertController = UIAlertController(title: "相手が見つかりました。", message: "・まずは自己紹介をしてみましょう。\n・相手が不快になる発言は禁止です。\n・出会いを目的にしないでください。\n・個人情報を相手に教えないでください。", preferredStyle:  UIAlertControllerStyle.alert)
+        let defaultAction: UIAlertAction = UIAlertAction(title: "同意します", style: UIAlertActionStyle.default, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+        })
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
+    }
     
     
     func get_message(ref2: DatabaseReference, my_id: Int, your_id: Int, value: NSDictionary, number_of_chat: Int, chat_room_content: Dictionary<String, AnyObject>) {

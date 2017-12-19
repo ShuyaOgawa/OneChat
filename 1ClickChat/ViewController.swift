@@ -61,8 +61,9 @@ class ViewController: JSQMessagesViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         print("------------------",self.view.subviews.count)
-        let alert: UIAlertController = UIAlertController(title: "相手が見つかりました。", message: "・まずは自己紹介をしてみましょう。\n・相手が不快になる発言は禁止です。\n・出会いを目的にしないでください。\n・個人情報を相手に教えないでください。", preferredStyle:  UIAlertControllerStyle.alert)
-        let defaultAction: UIAlertAction = UIAlertAction(title: "同意します", style: UIAlertActionStyle.default, handler:{
+        //\n・相手が不快になる発言は禁止です。\n・出会いを目的にしないでください。\n・個人情報を相手に教えないでください。
+        let alert: UIAlertController = UIAlertController(title: "相手が見つかりました", message: "まずは自己紹介をしてみましょう", preferredStyle:  UIAlertControllerStyle.alert)
+        let defaultAction: UIAlertAction = UIAlertAction(title: "チャットを始めます", style: UIAlertActionStyle.default, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
         })
@@ -131,7 +132,9 @@ class ViewController: JSQMessagesViewController {
             self.appDelegate.your_id = nil
             print("33333333", my_id)
             print("33333333", your_id)
-            self.performSegue(withIdentifier: "SegueId2", sender: self)
+            self.dismiss(animated: true, completion: {
+            })
+            
             print("bbbbbbbbbbbbbbbbbbbb")
         })
         let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler:{
@@ -153,7 +156,8 @@ class ViewController: JSQMessagesViewController {
             let your_id: AnyObject? = nil
             self.appDelegate.my_id = nil
             self.appDelegate.your_id = nil
-            self.performSegue(withIdentifier: "SegueId2", sender: self)
+            self.dismiss(animated: true, completion: {
+            })
         })
         alert.addAction(defaultAction)
         present(alert, animated: true, completion: nil)

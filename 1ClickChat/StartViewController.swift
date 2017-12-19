@@ -22,6 +22,7 @@ class StartViewController: VideoSplashViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         custom_button()
         setupVideo()
      /*   ref.child("user/all_member/0").setValue("must_not_delete")
@@ -33,8 +34,11 @@ class StartViewController: VideoSplashViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        StartButton.isEnabled = true
         print("fidjdgnjkddm", self.view.subviews.count)
     }
+    
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -135,6 +139,7 @@ class StartViewController: VideoSplashViewController {
                 print("self.appDelegate.my_id", self.appDelegate.my_id!)
                 print("self.appDelegate.your_id", self.appDelegate.your_id!)
                 ref.removeAllObservers()
+                
                 self.performSegue(withIdentifier: "SegueId", sender: self)
             
             }
@@ -160,7 +165,6 @@ class StartViewController: VideoSplashViewController {
         ref.child("user/waiting_member/\(my_id)").removeValue()
         ref.child("user/waiting_member/\(your_id)").removeValue()
         
-
         self.performSegue(withIdentifier: "SegueId", sender: self)
         
     }

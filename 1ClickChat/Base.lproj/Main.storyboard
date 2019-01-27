@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UFi-GW-M6q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UFi-GW-M6q">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Zapfino.ttf">
-            <string>Zapfino</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--StartView-->
         <scene sceneID="ktr-9f-h6n">
@@ -32,7 +28,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBX-qG-DYK">
-                                <rect key="frame" x="122" y="555" width="130" height="45"/>
+                                <rect key="frame" x="122" y="555" width="131" height="45"/>
                                 <color key="backgroundColor" red="0.46488422930000001" green="0.46488422930000001" blue="0.46488422930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="plm-Q8-OSg"/>
@@ -43,7 +39,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9yd-Ne-7nO">
-                                <rect key="frame" x="122" y="468" width="130" height="45"/>
+                                <rect key="frame" x="122" y="468" width="131" height="45"/>
                                 <color key="backgroundColor" red="0.24534436689747896" green="0.77890220207253891" blue="0.52374472175372722" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="dgZ-vb-90j"/>
@@ -78,7 +74,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mQY-bC-aqq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-639.20000000000005" y="-81.409295352323838"/>
+            <point key="canvasLocation" x="-854" y="-166"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">

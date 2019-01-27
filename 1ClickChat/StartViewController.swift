@@ -109,7 +109,6 @@ class StartViewController: VideoSplashViewController {
                         let all_member_array = user_array!["all_member"] as AnyObject?
                         let all_member_count = all_member_array?.count as Int?
                         self.appDelegate.your_id = all_member_count! - 1 as AnyObject
-                        print("heeeyy")
                         //ロード終了
                         self.ActivityIndicator.stopAnimating()
                         ref.removeAllObservers()
